@@ -24,7 +24,7 @@ const (
 	Minus string = "-"
 )
 
-func calculator(operator string, numbers ...float32) (result float32) {
+func calc(operator string, numbers ...float32) (result float32) {
 	for _, num := range numbers {
 		if operator == Plus {
 			result += num
@@ -57,7 +57,8 @@ func main() {
 	total := sum2(nums...)
 	fmt.Println(total)
 
-	// variadic multiple paramter
-	result := calculator(Plus, nums...)
+	// Fungsi variadic contoh 2
+	nums2 := []float32{1, 4, 2, 9}
+	result := calc(Plus, nums2...)
 	fmt.Println(result)
 }
