@@ -42,16 +42,14 @@ func main() {
 
 	var siswa3 = Siswa{
 		OrangTua: OrangTua{
-			Nama: "Eva",
-			Umur: 35,
+			Nama: "Hendro",
+			Umur: 42,
 		},
-		Nama:  "Fina",
-		Umur:  16,
-		Kelas: "10C",
+		Nama:  "Grace",
+		Umur:  10,
+		Kelas: "4C",
 	}
-	// Informasi Siswa 1:
-	// Nama: Ali, Umur: 15, Kelas: 9A
-	// Orang Tua: Budi, Umur: 40
+
 	fmt.Println("Informasi Siswa 1 :")
 	fmt.Printf("Nama : %s , Umur : %d , Kelas : %s\n", siswa1.Nama, siswa1.Umur, siswa1.Kelas)
 	fmt.Printf("Orang tua : %s, Umur : %d \n\n", siswa1.OrangTua.Nama, siswa1.OrangTua.Umur)
