@@ -46,5 +46,7 @@ func main() {
 	users2 = append(users2, user)
 	fmt.Println("User stelah ditambah dari frontend", len(users))
 	fmt.Println(users2)
+	// fmt.Println(users2)
+
 
 }
