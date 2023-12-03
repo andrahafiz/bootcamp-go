@@ -116,6 +116,7 @@ func (h Handler) GetById(rw http.ResponseWriter, r *http.Request) {
 		WriteJsonResponse(rw, resp)
 		return
 	}
+
 	resp := APIResponse{
 		Status:  http.StatusOK,
 		Message: "SUCCESS",

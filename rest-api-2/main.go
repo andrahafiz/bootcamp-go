@@ -4,8 +4,11 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"rest-api/database"
-	"rest-api/menu"
+	"rest-api-2/auth"
+	"rest-api-2/database"
+	routerChi "rest-api-2/infra/router/chi"
+	"rest-api-2/menu"
+	"rest-api-2/utility"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
@@ -14,9 +17,8 @@ import (
 func main() {
 	err := godotenv.Load(".env")
 	if err != nil {
-		log.Println("error when load .env file with error", err.Error())
+		log.Println("error when load env file with error", err.Error())
 	}
-
 	db, err := database.ConnectPostgres(
 		os.Getenv("DB_HOST"),
 		os.Getenv("DB_PORT"),
@@ -24,20 +26,20 @@ func main() {
 		os.Getenv("DB_PASSWORD"),
 		os.Getenv("DB_NAME"),
 	)
-
 	if err != nil {
 		panic(err)
 	}
 
-	if db == nil {
-		panic("db not connected")
-	}
-
+	utility.InitToken("INI_SECRET", 1*60)
 	router := chi.NewRouter()
 
+	router.Use(routerChi.Logger)
+
 	menu.Register(router, db)
+	auth.Register(router, db)
+
 	const port = ":8000"
 
-	log.Println("Server running at port", port)
+	log.Println("server running at port", port)
 	http.ListenAndServe(port, router)
 }
