@@ -1,4 +1,4 @@
-package menu
+package transactions
 
 import (
 	"database/sql"
@@ -7,13 +7,14 @@ import (
 )
 
 func Register(router *chi.Mux, db *sql.DB) {
-	repo := NewRepository(db)
 
+	repo := NewRepository(db)
 	svc := NewService(repo)
 	handler := NewHandler(svc)
-	router.Route("/api/menus", func(r chi.Router) {
+
+	router.Route("/api/transactions", func(r chi.Router) {
+		r.Post("/", handler.Process)
 		r.Get("/", handler.GetAll)
-		r.Get("/{id}", handler.GetById)
-		r.Post("/", handler.Create)
+		r.Get("/{id}", handler.DetailById)
 	})
 }
